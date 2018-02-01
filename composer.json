@@ -1,0 +1,24 @@
+{
+  "name": "mesour/ip-addresses",
+  "description": "IP address normalizer and validator. For IPv4 and IPv6.",
+  "license": ["MIT"],
+  "keywords": ["IP address","validator","normalizer"],
+  "authors": [{
+      "name": "Matouš Němec",
+      "homepage": "http://mesour.com"
+  }],
+  "require": {
+      "php": ">=7.0"
+  },
+  "require-dev": {
+      "tracy/tracy": "~2.3.0",
+      "slevomat/coding-standard": "^1.0",
+      "consistence/coding-standard": "^0.10",
+      "phpstan/phpstan": "^0.7.0",
+      "nette/robot-loader": "^2.4",
+      "nette/tester": "^1.7"
+  },
+  "autoload": {
+      "classmap": ["src/"]
+  }
+}
