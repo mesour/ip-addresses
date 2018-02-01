@@ -34,9 +34,8 @@ abstract class IpAddressNormalizer
 		$result = implode(':', $part);
 		if (strlen($result) == 39) {
 			return $result;
-		} else {
-			return false;
 		}
+		throw new \UnexpectedValueException('Ip address is not valid.');
 	}
 
 	final public static function compressIpV6($ip): string
