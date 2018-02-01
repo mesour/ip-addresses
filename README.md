@@ -14,8 +14,6 @@
 
 # Usage
 
-- **In `AaaaDnsRecord` is IPv6 compressed to short format.**
-
 ### Usage: `Mesour\IpAddresses\IpAddressValidator`
 
 ```php
