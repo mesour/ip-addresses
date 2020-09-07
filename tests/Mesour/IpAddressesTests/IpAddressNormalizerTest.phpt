@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Mesour\IpAddressesTests;
 
 use Mesour\IpAddresses\IpAddressNormalizer;
@@ -11,7 +13,7 @@ require_once __DIR__ . '/BaseTestCase.php';
 class IpAddressNormalizerTest extends BaseTestCase
 {
 
-	public function testCompress()
+	public function testCompress(): void
 	{
 		Assert::same(
 			'2001:db8::ff00:42:8329',
@@ -34,7 +36,7 @@ class IpAddressNormalizerTest extends BaseTestCase
 		);
 	}
 
-	public function testNormalize()
+	public function testNormalize(): void
 	{
 		Assert::same(
 			'2001:0db8:0000:0000:0000:ff00:0042:8329',

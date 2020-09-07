@@ -6,3 +6,9 @@ parameters:
 	excludes_analyse:
 		- %rootDir%/../../../tests/bootstrap.php
 		- %rootDir%/../../../tests/environment.php
+
+	ignoreErrors:
+		- '#Parameter \#1 \$var of function count expects array\|Countable, array<int, string>\|string given\.#'
+		- '#Parameter \#2 \$str of function explode expects string, array<int, string>\|string given\.#'
+		- '#Parameter \#1 \$arr1 of function array_merge expects array, array<int, string>\|string given\.#'
+		- '#Parameter \#2 \.\.\.\$args of function array_merge expects array, array<int, string>\|string given\.#'

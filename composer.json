@@ -8,7 +8,7 @@
       "homepage": "http://mesour.com"
   }],
   "require": {
-      "php": ">=7.0"
+      "php": ">=7.1"
   },
   "require-dev": {
       "tracy/tracy": "~2.3.0",
