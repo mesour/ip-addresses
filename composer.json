@@ -16,7 +16,8 @@
       "consistence/coding-standard": "^3.10",
       "phpstan/phpstan": "^0.12.42",
       "nette/robot-loader": "^2.4",
-      "nette/tester": "^2.3"
+      "nette/tester": "^2.3",
+      "jakub-onderka/php-parallel-lint": "^1.0"
   },
   "autoload": {
       "classmap": ["src/"]
