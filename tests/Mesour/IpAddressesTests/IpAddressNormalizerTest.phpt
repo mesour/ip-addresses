@@ -10,7 +10,10 @@ use Tester\Assert;
 require_once __DIR__ . '/../../bootstrap.php';
 require_once __DIR__ . '/BaseTestCase.php';
 
-class IpAddressNormalizerTest extends BaseTestCase
+/**
+ * @testCase
+ */
+final class IpAddressNormalizerTest extends BaseTestCase
 {
 
 	public function testCompress(): void
