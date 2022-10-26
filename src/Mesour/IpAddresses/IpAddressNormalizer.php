@@ -10,14 +10,14 @@ abstract class IpAddressNormalizer
 
 	final public static function normalizeIpV6(string $address): string
 	{
-		if (\strpos($address, '::') !== false) {
+		if (\str_contains($address, '::')) {
 			$part = \explode('::', $address);
 			$part[0] = \explode(':', $part[0]);
 			$part[1] = \explode(':', $part[1]);
 			$missing = [];
 
 			for ($i = 0; $i < 8 - (\count($part[0]) + \count($part[1])); $i++) {
-				\array_push($missing, '0000');
+				$missing[] = '0000';
 			}
 
 			$missing = \array_merge($part[0], $missing);
@@ -45,7 +45,7 @@ abstract class IpAddressNormalizer
 
 	final public static function compressIpV6(string $ip): string
 	{
-		if (\substr($ip, 0, 4) === '0000') {
+		if (\str_starts_with($ip, '0000')) {
 			$ip = \substr_replace($ip, ':0', 0, 4);
 		}
 
@@ -53,7 +53,7 @@ abstract class IpAddressNormalizer
 		$ip = \preg_replace('/:0{1,3}(?=\w)/', ':', $ip);
 		$z = ':0:0:0:0:0:0:0:';
 
-		while (\strpos($ip, '::') === false && \strlen($z) >= 5) {
+		while (!\str_contains($ip, '::') && \strlen($z) >= 5) {
 			$pos = \strpos($ip, $z);
 
 			if ($pos !== false) {

@@ -8,16 +8,14 @@
       "homepage": "http://mesour.com"
   }],
   "require": {
-      "php": ">=7.1"
+      "php": ">=8.0"
   },
   "require-dev": {
       "tracy/tracy": "~2.3.0",
-      "slevomat/coding-standard": "^6.4",
-      "consistence/coding-standard": "^3.10",
-      "phpstan/phpstan": "^0.12.42",
+      "phpstan/phpstan": "^1.8.5",
       "nette/robot-loader": "^2.4",
       "nette/tester": "^2.3",
-      "jakub-onderka/php-parallel-lint": "^1.0"
+      "php-parallel-lint/php-parallel-lint": "^1.3"
   },
   "autoload": {
       "classmap": ["src/"]

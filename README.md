@@ -38,8 +38,31 @@ IpAddressNormalizer::compressIpV6('2001:0db8:0800:0000:0000:ff00:0042:8329');
 // result is: 2001:db8:800::ff00:42:8329
 ```
 
-# Tests
+### Usage: `Mesour\IpAddresses\IpAddress`
 
-- Run tests: `bin/check-tests`
-- PHP Stan: `bin/check-stan`
-- Code style: `bin/check-cs`
+Normalize IPv4:
+```php
+$ipAddress = IpAddress::create('127.0.0.1');
+
+$ipAddress->isIpV4(); // result is: true
+$ipAddress->isIpV6(); // result is: false
+$ipAddress->getValue(); // result is: 127.0.0.1
+```
+
+Normalize IPv6:
+
+- Result of `getValue` is compressed IPv6 value
+
+```php
+$ipAddress = IpAddress::create('2001:0db8:0800:0000:0000:ff00:0042:8329');
+
+$ipAddress->isIpV4(); // result is: false
+$ipAddress->isIpV6(); // result is: true
+$ipAddress->getValue(); // result is: 2001:db8:800::ff00:42:8329
+```
+
+# Development
+
+- Syntax check: `vendor/bin/parallel-lint src tests`
+- PHP Stan: `vendor/bin/phpstan analyse -l 7 -c phpstan.neon src tests`
+- Run tests: `vendor/bin/tester -p php tests/ -s -c tests/php.ini`
