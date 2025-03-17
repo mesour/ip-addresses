@@ -56,7 +56,7 @@ jobs:
       - name: Run parallel lint
         run: composer run lint
 
-      - name: Run tests
+      - name: Run PhpStan
         run: composer run phpstan
 
       - name: Run tests

@@ -18,11 +18,11 @@ final class IpAddress
 			return new self($ipAddress, true);
 		}
 
-        if (IpAddressValidator::isIpV6($ipAddress)) {
+		if (IpAddressValidator::isIpV6($ipAddress)) {
 			return new self(IpAddressNormalizer::compressIpV6($ipAddress), false);
 		}
 
-        throw new IpAddressIsInvalidException();
+		throw new IpAddressIsInvalidException();
 	}
 
 	public function isIpV4(): bool
