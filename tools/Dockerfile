@@ -16,10 +16,6 @@ RUN chmod -R 0777 .
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-RUN mkdir -p /var/www/.composer
-
-RUN chown www-data:www-data -R /var/www/.composer
-
 WORKDIR /var/www/html
 
 ADD . /var/www/html

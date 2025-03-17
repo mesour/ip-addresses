@@ -8,7 +8,7 @@ rebuild:
 	docker compose up -d --build
 
 composer:
-	docker compose exec -it php sh -c "composer install"
+	docker compose exec -it php sh -c "composer update"
 
 cs:
 	docker compose exec -it php sh -c "composer run cs"
