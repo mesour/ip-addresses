@@ -8,7 +8,6 @@ use Mesour\IpAddresses\IpAddress;
 use Mesour\IpAddresses\IpAddressIsInvalidException;
 use PHPUnit\Framework\TestCase;
 
-/** @testCase */
 final class IpAddressTest extends TestCase
 {
 
