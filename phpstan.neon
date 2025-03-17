@@ -1,8 +1,0 @@
-parameters:
-
-	excludePaths:
-		- %rootDir%/../../../tests/bootstrap.php
-		- %rootDir%/../../../tests/environment.php
-
-	ignoreErrors:
-		- '*Parameter #2 $string of function explode expects string, array<int, string>\|string given.*'

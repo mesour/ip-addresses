@@ -1,5 +1,7 @@
 .idea
+.composer
 /vendor
+/temp
 /composer.lock
 /examples/log
 /tests/log

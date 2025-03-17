@@ -4,29 +4,32 @@ declare(strict_types = 1);
 
 namespace Mesour\IpAddresses;
 
+use UnexpectedValueException;
+
 /** @author Matouš Němec <mesour.com> */
 abstract class IpAddressNormalizer
 {
 
+	/** @throws \UnexpectedValueException */
 	final public static function normalizeIpV6(string $address): string
 	{
 		if (\str_contains($address, '::')) {
-			$part = \explode('::', $address);
-			$part[0] = \explode(':', $part[0]);
-			$part[1] = \explode(':', $part[1]);
+			$parts = $part = \explode('::', $address);
+			$parts[0] = \explode(':', $part[0]);
+			$parts[1] = \explode(':', $part[1]);
 			$missing = [];
 
-			for ($i = 0; $i < 8 - (\count($part[0]) + \count($part[1])); $i++) {
+			for ($i = 0; $i < 8 - (\count($parts[0]) + \count($parts[1])); $i++) {
 				$missing[] = '0000';
 			}
 
-			$missing = \array_merge($part[0], $missing);
-			$part = \array_merge($missing, $part[1]);
+			$missing = \array_merge($parts[0], $missing);
+			$parts = \array_merge($missing, $parts[1]);
 		} else {
-			$part = \explode(':', $address);
+			$parts = \explode(':', $address);
 		}
 
-		foreach ($part as &$p) {
+		foreach ($parts as &$p) {
 			while (\strlen($p) < 4) {
 				$p = '0' . $p;
 			}
@@ -34,15 +37,16 @@ abstract class IpAddressNormalizer
 
 		unset($p);
 
-		$result = \implode(':', $part);
+		$result = \implode(':', $parts);
 
 		if (\strlen($result) === 39) {
 			return $result;
 		}
 
-		throw new \UnexpectedValueException('Ip address is not valid.');
+		throw new UnexpectedValueException('Ip address is not valid.');
 	}
 
+	/** @throws \UnexpectedValueException */
 	final public static function compressIpV6(string $ip): string
 	{
 		if (\str_starts_with($ip, '0000')) {
@@ -51,6 +55,11 @@ abstract class IpAddressNormalizer
 
 		$ip = \str_replace(':0000', ':0', $ip);
 		$ip = \preg_replace('/:0{1,3}(?=\w)/', ':', $ip);
+
+		if ($ip === null) {
+			throw new \LogicException('Ip address is not valid.');
+		}
+
 		$z = ':0:0:0:0:0:0:0:';
 
 		while (!\str_contains($ip, '::') && \strlen($z) >= 5) {

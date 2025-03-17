@@ -1,0 +1,62 @@
+name: "CI"
+
+on:
+  pull_request:
+    types: [ "opened", "synchronize", "edited", "reopened" ]
+    paths-ignore:
+      - "docs/**"
+  push:
+    branches:
+      - "**"
+    paths-ignore:
+      - "docs/**"
+  schedule:
+    - cron: "0 8 * * 1" # At 08:00 on Monday
+  workflow_dispatch:
+    inputs: {}
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+permissions:
+  contents: "read"
+
+jobs:
+  ci-checks:
+    name: "CI checks"
+    runs-on: "${{ matrix.operating-system }}"
+
+    if: |
+      github.event_name != 'pull_request'
+      || github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name
+
+    strategy:
+      matrix:
+        operating-system: [ "ubuntu-latest" ]
+        php-version: ["8.0", "8.1", "8.2", "8.3", "8.4"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP ${{ matrix.php-version }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          tools: "composer:v2"
+
+      - name: Verify PHP version
+        run: php -v
+
+      - name: "Composer"
+        uses: "./.github/actions/php-composer"
+
+      - name: Run parallel lint
+        run: composer run lint
+
+      - name: Run PhpStan
+        run: composer run phpstan
+
+      - name: Run tests
+        run: composer run tests
