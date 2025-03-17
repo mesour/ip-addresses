@@ -1,0 +1,11 @@
+services:
+  php:
+    build:
+      context: .
+      dockerfile: tools/Dockerfile
+      args:
+        - COMPOSER_HOME=/var/www/html/.composer
+    environment:
+      COMPOSER_HOME: /var/www/html/.composer
+    volumes:
+      - ./:/var/www/html

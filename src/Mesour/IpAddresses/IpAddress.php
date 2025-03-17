@@ -8,25 +8,21 @@ namespace Mesour\IpAddresses;
 final class IpAddress
 {
 
-	private string $ipAddress;
-
-	private bool $ipV4;
-
-	private function __construct(string $ipAddress, bool $ipV4)
+	private function __construct(private string $ipAddress, private bool $ipV4)
 	{
-		$this->ipAddress = $ipAddress;
-		$this->ipV4 = $ipV4;
 	}
 
 	public static function create(string $ipAddress): self
 	{
 		if (IpAddressValidator::isIpV4($ipAddress)) {
 			return new self($ipAddress, true);
-		} elseif (IpAddressValidator::isIpV6($ipAddress)) {
-			return new self(IpAddressNormalizer::compressIpV6($ipAddress), false);
-		} else {
-			throw new IpAddressIsInvalidException();
 		}
+
+        if (IpAddressValidator::isIpV6($ipAddress)) {
+			return new self(IpAddressNormalizer::compressIpV6($ipAddress), false);
+		}
+
+        throw new IpAddressIsInvalidException();
 	}
 
 	public function isIpV4(): bool

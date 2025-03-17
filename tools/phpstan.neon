@@ -1,0 +1,7 @@
+parameters:
+	level: 9
+	tmpDir: ../temp/.php-stan-cache
+	resultCachePath: %currentWorkingDirectory%/temp/.php-stan-cache/resultCache.php
+	paths:
+		- ../src
+		- ../tests

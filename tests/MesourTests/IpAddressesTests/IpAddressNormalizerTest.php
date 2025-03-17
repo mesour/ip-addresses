@@ -2,38 +2,32 @@
 
 declare(strict_types = 1);
 
-namespace Mesour\IpAddressesTests;
+namespace MesourTests\IpAddressesTests;
 
 use Mesour\IpAddresses\IpAddressNormalizer;
-use Tester\Assert;
+use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . '/../../bootstrap.php';
-require_once __DIR__ . '/BaseTestCase.php';
-
-/**
- * @testCase
- */
-final class IpAddressNormalizerTest extends BaseTestCase
+final class IpAddressNormalizerTest extends TestCase
 {
 
 	public function testCompress(): void
 	{
-		Assert::same(
+		self::assertSame(
 			'2001:db8::ff00:42:8329',
 			IpAddressNormalizer::compressIpV6('2001:0db8:0000:0000:0000:ff00:0042:8329')
 		);
 
-		Assert::same(
+		self::assertSame(
 			'2001:db8:800::ff00:42:8329',
 			IpAddressNormalizer::compressIpV6('2001:0db8:0800:0000:0000:ff00:0042:8329')
 		);
 
-		Assert::same(
+		self::assertSame(
 			'0:db8:800::ff00:42:8329',
 			IpAddressNormalizer::compressIpV6('0000:0db8:0800:0000:0000:ff00:0042:8329')
 		);
 
-		Assert::same(
+		self::assertSame(
 			'f000:db8:800::ff00:42:0',
 			IpAddressNormalizer::compressIpV6('f000:0db8:0800:0000:0000:ff00:0042:0000')
 		);
@@ -41,28 +35,25 @@ final class IpAddressNormalizerTest extends BaseTestCase
 
 	public function testNormalize(): void
 	{
-		Assert::same(
+		self::assertSame(
 			'2001:0db8:0000:0000:0000:ff00:0042:8329',
 			IpAddressNormalizer::normalizeIpV6('2001:db8::ff00:42:8329')
 		);
 
-		Assert::same(
+		self::assertSame(
 			'2001:0db8:0800:0000:0000:ff00:0042:8329',
 			IpAddressNormalizer::normalizeIpV6('2001:db8:800::ff00:42:8329')
 		);
 
-		Assert::same(
+		self::assertSame(
 			'0000:0db8:0800:0000:0000:ff00:0042:8329',
 			IpAddressNormalizer::normalizeIpV6('0:db8:800::ff00:42:8329')
 		);
 
-		Assert::same(
+		self::assertSame(
 			'f000:0db8:0800:0000:0000:ff00:0042:0000',
 			IpAddressNormalizer::normalizeIpV6('f000:db8:800::ff00:42:0')
 		);
 	}
 
 }
-
-$test = new IpAddressNormalizerTest();
-$test->run();

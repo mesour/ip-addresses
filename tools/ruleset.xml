@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <ruleset name="Mesour Coding Standard">
-    <rule ref="vendor/consistence/coding-standard/Consistence/ruleset.xml">
+    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/ruleset.xml">
         <!-- because of exceptions.php -->
         <exclude name="Squiz.Classes.ClassFileName.NoMatch"/>
         <exclude name="PSR1.Classes.ClassDeclaration.MultipleClasses"/>
@@ -28,11 +28,17 @@
         <exclude name="SlevomatCodingStandard.ControlStructures.RequireYodaComparison.RequiredYodaComparison"/>
         <exclude name="SlevomatCodingStandard.ControlStructures.NewWithoutParentheses.UselessParentheses"/>
         <exclude name="SlevomatCodingStandard.Functions.TrailingCommaInCall.MissingTrailingComma"/>
-    </rule>
-    <rule ref="vendor/slevomat/coding-standard/SlevomatCodingStandard/ruleset.xml">
-        <exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameAfterKeyword"/>
+
         <exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedExceptions"/>
         <exclude name="SlevomatCodingStandard.Namespaces.UseOnlyWhitelistedNamespaces"/>
+
+        <!-- because of BC break for now -->
+        <exclude name="SlevomatCodingStandard.Classes.SuperfluousExceptionNaming.SuperfluousSuffix"/>
+        <!-- because of need it for now -->
+        <exclude name="SlevomatCodingStandard.Complexity.Cognitive.ComplexityTooHigh"/>
+        <exclude name="SlevomatCodingStandard.Functions.FunctionLength.FunctionLength"/>
+        <exclude name="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall.MissingTrailingComma"/>
+        <exclude name="SlevomatCodingStandard.Classes.DisallowConstructorPropertyPromotion.DisallowedConstructorPropertyPromotion"/>
 
         <!-- because of exceptions.php -->
         <exclude name="SlevomatCodingStandard.Files.TypeNameMatchesFileName"/>

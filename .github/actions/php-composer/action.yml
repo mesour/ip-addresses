@@ -1,0 +1,28 @@
+name: "PHP_Composer"
+description: "Run PHP_Composer"
+
+inputs:
+  command:
+    required: false
+    default: "composer install --no-interaction --no-progress --prefer-dist"
+    description: "Composer's installation command"
+
+runs:
+  using: "composite"
+
+  steps:
+    - name: "Get Composer cache directory"
+      id: "php-composer-cache"
+      shell: "bash"
+      run: 'echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT'
+
+    - name: "Cache Composer dependencies"
+      uses: "actions/cache@v4"
+      with:
+        path: "${{ steps.php-composer-cache.outputs.dir }}"
+        key: "ori-php-composer-${{ runner.os }}-${{  hashFiles('**/composer.json', '**/composer.lock') }}"
+        restore-keys: "ori-php-composer-${{ runner.os }}-"
+
+    - name: "Install Composer dependencies"
+      shell: "bash"
+      run: "${{ inputs.command }}"
