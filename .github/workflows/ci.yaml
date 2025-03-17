@@ -46,6 +46,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
+          tools: "composer:v2"
 
       - name: Verify PHP version
         run: php -v
