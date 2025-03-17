@@ -23,8 +23,8 @@ permissions:
   contents: "read"
 
 jobs:
-  coding-standard:
-    name: "Coding standard"
+  ci-checks:
+    name: "CI checks"
     runs-on: "${{ matrix.operating-system }}"
 
     if: |
@@ -35,7 +35,7 @@ jobs:
       matrix:
         include:
           - operating-system: "ubuntu-latest"
-            php-version: ["8.3", "8.4"]
+            php-version: "8.4"
 #            php-version: ["7.4", "8.0", "8.1", "8.2", "8.3", "8.4"]
 
     steps:
